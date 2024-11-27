@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <!-- Latest compiled and minified CSS & JS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<style>
+    .text-white {
+        color: white;
+    }
+
+    /* Ensure 5 items per row using flexbox */
+    .book-card {
+        flex: 1 1 18%; /* Adjusted to 18% to make room for margins */
+        max-width: 18%; /* Limit the max width to 18% */
+        padding: 10px;
+        margin: 10px; /* Added margin for spacing between cards */
+    }
+    
+    @media (max-width: 768px) {
+        .book-card {
+            flex: 1 1 45%; /* 2 items per row on small screens */
+            max-width: 45%;
+            margin: 10px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .book-card {
+            flex: 1 1 100%; /* 1 item per row on extra small screens */
+            max-width: 100%;
+            margin: 10px;
+        }
+    }
+
+    /* Add some margin to the rows */
+    .row {
+        margin-bottom: 20px;
+    }
+
+</style>
+
+<body style="background-color: #000000;">
+    <nav class="navbar">
+        <p class="navbar-brand" style="color: white;">ShelfWise</p>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/recommend">Recommend</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 jumbotron text-center">
+                <h1>ShelfWise</h1>
+                <h2>Book Recommender</h2>
+                <p>Get book recommendations based on your reading history and preferences.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1 class="text-white">Top 50 Books</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Displaying books in 5 items per row -->
+    <div class="container">
+        <div class="row d-flex flex-wrap" style="margin-top: 40px;"> <!-- d-flex and flex-wrap to ensure row flexbox -->
+            {% for book in range(book_name|length) %}
+            <div class="book-card"> <!-- Custom class for 5 per row -->
+                <div class="card">
+                    <img class="card-img-top" src=" {{ image[book] }}" alt="...">
+                    <div class="card-body">
+                        <h6 class="card-title">{{ book_name[book] }}</h6>
+                        <p class="card-text">{{ author[book] }}</p>
+                        <p class="card-text">Votes - {{ votes[book] }}</p>
+                        <p class="card-text">Rating - {{ rating[book] }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
